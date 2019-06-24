@@ -1,22 +1,16 @@
 import React from "react";
-
-
-
 import { MDBCol,MDBView} from "mdbreact";
+import PropTypes from 'prop-types';
 
-class UserItem extends React.Component {
+const UserItem = ({user: { login, avatar_url, html_url} }) => {
 
-
-    
- render() {
-
-   const {login, avatar_url, html_url} = this.props.user;
+   
 
         return (
             
                     <MDBCol  lg="2" md="3" className="mb-sm-2 mb-1">
                         <MDBView>
-                        <div style={{ backgroundColor: "#564657", padding: "40px",  boxShadow: "10px 10px 5px #aaaaaa" }}>
+                        <div style={{ backgroundColor: "#6699cc", padding: "40px",  boxShadow: "10px 10px 5px #aaaaaa" }}>
                         <img
                             tag="img"
                             src={avatar_url}
@@ -34,17 +28,10 @@ class UserItem extends React.Component {
                         </div>
                     
                      </MDBCol>
-                   
-                
-       
-          
-     
-  
-           
-        );
-    }
-
+          );
 }
 
-
+UserItem.propTypes={
+    user : PropTypes.object.isRequired
+}
 export default UserItem;
