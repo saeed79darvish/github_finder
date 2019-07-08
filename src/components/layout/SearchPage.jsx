@@ -1,27 +1,55 @@
-import React from "react";
-import { MDBCol, MDBIcon } from "mdbreact";
-
-class SearchPage extends React.Component {
-    render() {
+import React, { useState, useContext } from "react";
+import GithubContext from '../../context/github/githubContext'
+import AlertContext from '../../context/alert/alertContext'
 
 
-        return (
-            <div style={{ marginTop: "100px" }}>
+const SearchPage = () => {
 
-                <MDBCol md="6" className="mt-5" >
-                    <div className="input-group md-form form-sm form-2 pl-0">
-                        <div className="input-group-prepend">
-                            <span className="input-group-text purple lighten-3" id="basic-text1">
-                                <MDBIcon className="text-white" icon="search" />
-                            </span>
-                        </div>
-                        <input className="form-control my-0 py-1" type="text" placeholder="Search" aria-label="Search" />
-                    </div>
-                </MDBCol>
-            </div>
+    const githubContext = useContext(GithubContext);
+    const alertContext = useContext(AlertContext);
 
-        );
+    const [text, setText] = useState('');
+
+
+
+
+
+
+    const onChange = (e) => {
+        setText(e.target.value)
     }
+    const onSubmit = (e) => {
+        e.preventDefault();
+        if (text === "") {
+            alertContext.setAlert("Please Enter Something", "danger");
+        } else {
+
+            githubContext.searchUsers(text);
+            setText("");
+        }
+
+    }
+
+
+
+    return (
+        <div style={{ marginTop: "80px", padding: "40px" }}>
+            <form className="form" onSubmit={onSubmit}>
+                <input type="text" name="text" placeholder="Search Users..." value={text} onChange={onChange} style={{ width: "100%", marginRight: "10px" }} />
+
+                <input type="submit" value="Search" className="btn btn-dark btn-block" style={{ marginTop: "5px" }} />
+
+            </form>
+
+            {githubContext.users.length > 0 && (
+                <button className="btn btn-primary btn-block"
+                    style={{ marginTop: "10px" }}
+                    onClick={githubContext.clearUsers} >Clear</button>
+            )}
+        </div>
+
+    )
+
 }
 
 export default SearchPage;

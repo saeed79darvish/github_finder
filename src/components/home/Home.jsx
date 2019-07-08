@@ -1,36 +1,19 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import SearchPage from '../layout/SearchPage';
 import Users from '../layout/Users.js';
+import Alert from '../layout/Alert.js';
 
+const Home = () => {
 
-class Home extends React.Component {
+    return (
+        <Fragment>
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            loading: false,
-            users: []
-        };
-    }
+            <SearchPage />
+            <Alert />
+            <Users />
 
-    componentDidMount() {
-        this.setState({ loading: true })
-        fetch("https://api.github.com/users?since=1")
-            .then(res => res.json())
-            .then(data => this.setState({ users: data, loading: false }));
-    }
-
-    render() {
-
-        return (
-            <div>
-
-                <SearchPage />
-                <Users loading={this.state.loading} users={this.state.users} />
-            </div>
-        )
-
-    }
+        </Fragment>
+    )
 }
 
 export default Home;

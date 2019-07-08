@@ -1,6 +1,7 @@
 import React from "react";
 import { MDBCol,MDBView} from "mdbreact";
 import PropTypes from 'prop-types';
+import {Link } from "react-router-dom";
 
 const UserItem = ({user: { login, avatar_url, html_url} }) => {
 
@@ -20,10 +21,10 @@ const UserItem = ({user: { login, avatar_url, html_url} }) => {
                           </div>
                         </MDBView>
 
-                        <h5 className="font-weight-bold mt-4 mb-3">{login}</h5>
+                        <h5 className="font-weight-bold mt-4 mb-3 ">{login}</h5>
                         <div >
-                        <button style={{ backgroundColor: "#ff0000"}}>
-                             <a href={html_url} >More</a>
+                        <button style={{ backgroundColor: "#ff0000",boxShadow: "3px 3px 3px #aaaaaa" }}>
+                             <Link to={`user/${login}`} >More</Link>
                         </button>
                         </div>
                     
