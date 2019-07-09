@@ -5,7 +5,6 @@ import User from "./components/layout/User";
 import Home from "./components/home/Home";
 import GithubState from "./context/github/GithubState";
 import AlertState from "./context/alert/AlertState";
-import notFound from "./components/layout/notFound";
 
 console.log(
   "Hello There Developer welcome back to my Github Finder Application."
@@ -18,7 +17,6 @@ const App = () => {
           <NavbarPage />
           <Route exact path="/" component={Home} />
           <Route exact path="/user/:login" component={User} />
-          <Route component={notFound} />
         </BrowserRouter>
       </AlertState>
     </GithubState>
